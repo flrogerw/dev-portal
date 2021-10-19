@@ -13,7 +13,7 @@ Developer Portal Template Files for Kong Enterprise Edition
 First install the Kong Portal CLI, then follow these instructions:
 
 ```bash
-$ git clone ggit@gitlab.audacy.com:bass/kong-portal-template.git
+$ git clone git@gitlab.audacy.com:bass/kong-portal-template.git
 $ cd kong-portal-templates
 $ portal enable default
 $ portal deploy default
