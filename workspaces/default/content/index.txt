@@ -3,6 +3,6 @@ layout: homepage.html
 title: Home
 
 hero:
-  title: Built with Kong
-  tagline: Empowering developers across the globe.
+  title: Welcome to Audacy Developer Portal
+  tagline: Community. Curiosity. Creativity. Courage.
 ---

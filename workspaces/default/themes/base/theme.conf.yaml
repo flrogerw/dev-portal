@@ -11,7 +11,7 @@ colors:
     value: '#FFFFFF'
     description: 'Background on pages'
   hero:
-    value: '#003459'
+    value: '#FE5000'
     description: 'Background for hero text on hompage, about, login, contact us...'
   text_hero:
     value: '#FFFFFF'
@@ -60,4 +60,7 @@ colors:
     description: Text for Secondary Button
     value: '#21A66F'
 images:
-  logo: assets/images/logo-developers-light.png
+  logo: assets/images/audacy.png
+  favicon: assets/images/favicon.png
+  twitter: assets/images/twitter.png
+  linkedin: assets/images/linkedin.png

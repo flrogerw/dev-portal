@@ -15,6 +15,7 @@ First install the Kong Portal CLI, then follow these instructions:
 ```bash
 $ git clone git@github.com:Kong/kong-portal-templates.git
 $ cd kong-portal-templates
+$ portal enable default
 $ portal deploy default
 ```
 
