@@ -3,6 +3,18 @@
 # do not modify it directly 
 
 openapi: 3.0.1
+servers:
+  - description: Mock Environment
+    url: https://audacy-mock-server.heroku.work.dev
+  - description: Audacy Environments
+    url: https://api.{environment}.audacy.com
+    variables:
+      environment:
+        default: dev
+        enum:
+          - dev
+          - qa
+          - stg
 components:
   parameters:
     Accept-Language:
@@ -83,6 +95,29 @@ components:
               type: string
             type: array
       description: OK
+    PlaybacksResponse:
+      content:
+        application/json:
+          schema:
+            additionalProperties:
+              type: number
+              x-additionalPropertiesName: contentId
+            type: object
+      description: A mapping of content IDs to playback resume points (in seconds)
+    PostPlaybacksResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                type: string
+              playbackOffset:
+                type: number
+            required:
+              - id
+              - playbackOffset
+            type: object
+      description: The playback resume point that was just added to the user's profile
     ProfileDeleteResponse:
       content:
         application/json:
@@ -189,6 +224,29 @@ components:
             required:
               - content
               - errors
+            type: object
+      description: OK
+    ExperienceContentResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              content:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/AudioClip'
+                    - $ref: '#/components/schemas/Episode'
+                    - $ref: '#/components/schemas/Tag'
+                    - $ref: '#/components/schemas/Station'
+                    - $ref: '#/components/schemas/Show'
+                    - $ref: '#/components/schemas/AudioClipSummary'
+                    - $ref: '#/components/schemas/TagSummary'
+                    - $ref: '#/components/schemas/StationSummary'
+                    - $ref: '#/components/schemas/ShowSummary'
+                    - $ref: '#/components/schemas/EpisodeSummary'
+                type: array
+            required:
+              - content
             type: object
       description: OK
     ExperienceContentViewResponse:
@@ -1552,7 +1610,7 @@ components:
         - config
       type: object
 paths:
-  /profile/v1/follows:
+  /identity/v1/follows:
     get:
       description: >-
         The purpose of this endpoint is for the Client to compare Content IDs
@@ -1572,7 +1630,7 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
       summary: Retrieve followed content IDs
       tags:
-        - follows
+        - identity
     post:
       operationId: postFollows
       parameters:
@@ -1589,8 +1647,56 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
       summary: Follow new content IDs
       tags:
-        - follows
-  /profile/v1/queue:
+        - identity
+  /identity/v1/playbacks:
+    get:
+      description: Get the user's playback resume points
+      operationId: getPlaybacks
+      parameters:
+        - $ref: '#/components/parameters/Accept-Language'
+        - $ref: '#/components/parameters/Aud-Correlation-Id'
+        - $ref: '#/components/parameters/Aud-Platform'
+        - $ref: '#/components/parameters/Aud-Platform-Variant'
+        - $ref: '#/components/parameters/Aud-Session-Id'
+        - $ref: '#/components/parameters/Aud-Uuid'
+      responses:
+        '200':
+          $ref: '#/components/responses/PlaybacksResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+      tags:
+        - identity
+    post:
+      description: Add a playback resume point to the user's list
+      operationId: postPlaybacks
+      parameters:
+        - $ref: '#/components/parameters/Accept-Language'
+        - $ref: '#/components/parameters/Aud-Correlation-Id'
+        - $ref: '#/components/parameters/Aud-Platform'
+        - $ref: '#/components/parameters/Aud-Platform-Variant'
+        - $ref: '#/components/parameters/Aud-Session-Id'
+        - $ref: '#/components/parameters/Aud-Uuid'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  type: string
+                playbackOffset:
+                  type: number
+              required:
+                - id
+                - playbackOffset
+              type: object
+      responses:
+        '201':
+          $ref: '#/components/responses/PostPlaybacksResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+      tags:
+        - identity
+  /identity/v1/queue:
     get:
       description: >-
         The purpose of this endpoint is for the Client to compare Content IDs
@@ -1610,7 +1716,7 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
       summary: Retrieve queued content IDs
       tags:
-        - queue
+        - identity
     put:
       operationId: putQueue
       parameters:
@@ -1632,8 +1738,8 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
       summary: Update the user's playback queue
       tags:
-        - queue
-  /profile/v1/recents:
+        - identity
+  /identity/v1/recents:
     get:
       operationId: getRecents
       parameters:
@@ -1652,7 +1758,7 @@ paths:
         Retrieve the user's recently played items (content IDs and timestamp -
         last played)
       tags:
-        - recents
+        - identity
     post:
       operationId: postRecents
       parameters:
@@ -1678,8 +1784,8 @@ paths:
         Update/store the user's recently played items (content IDs and timestamp
         - last played)
       tags:
-        - recents
-  /profile/v1/users:
+        - identity
+  /identity/v1/users:
     post:
       operationId: postNewUserProfile
       requestBody:
@@ -1710,8 +1816,8 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
       summary: Create new user profile
       tags:
-        - users
-  /profile/v1/users/{id}:
+        - identity
+  /identity/v1/users/{id}:
     delete:
       operationId: deleteUserProfile
       parameters:
@@ -1731,7 +1837,7 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
       summary: Delete user profile
       tags:
-        - users
+        - identity
     get:
       operationId: getUserProfile
       parameters:
@@ -1753,7 +1859,7 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
       summary: Retrieve user profile
       tags:
-        - users
+        - identity
     patch:
       operationId: patchUserProfile
       parameters:
@@ -1784,8 +1890,41 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
       summary: Update user profile
       tags:
-        - users
+        - identity
   /experience/v1/content:
+    get:
+      description: Retrieve one or more content objects by ID
+      operationId: getExperienceContent
+      parameters:
+        - $ref: '#/components/parameters/Accept-Language'
+        - $ref: '#/components/parameters/Aud-Correlation-Id'
+        - $ref: '#/components/parameters/Aud-Platform'
+        - $ref: '#/components/parameters/Aud-Platform-Variant'
+        - $ref: '#/components/parameters/Aud-Session-Id'
+        - $ref: '#/components/parameters/Aud-Uuid'
+        - description: Pipe-delimited list of content IDs
+          in: query
+          name: contentId
+          required: true
+          schema:
+            type: string
+        - description: Object Type
+          in: query
+          name: objectType
+          required: true
+          schema:
+            enum:
+              - FULL
+              - SUMMARY
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ExperienceContentResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+      summary: Multiple content objects
+      tags:
+        - experience
     post:
       description: Retrieve multiple content objects by ID
       operationId: postExperienceContent
@@ -2121,6 +2260,6 @@ paths:
         - experience
 info:
   description: Audacy 2.0 API Gateway proposal.
-  title: Audacy API Gateway
+  title: Audacy API Gateway (Client)
   version: 3.0.0
 
