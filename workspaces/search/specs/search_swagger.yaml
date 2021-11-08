@@ -1,0 +1,1938 @@
+openapi: 3.0.2
+info:
+  title: RADIUS API
+  description: >-
+    This API provides access to RADIO.COM Improved User Search Service for
+    internal and partner platforms. The main use case is to make intelligent
+    search results to users as well as more extensive search capabilities.
+  version: 1.0.1
+servers:
+  - url: search.radio-stg.com/search
+paths:
+  '/clips/{id}':
+    post:
+      description: Insert new Clip into ElasticSearch.
+      operationId: postClip
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Clips
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      requestBody:
+        $ref: '#/components/requestBodies/ClipPostRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClipApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      description: Update Clip in ElasticSearch index.
+      operationId: patchClip
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Clips
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      requestBody:
+        $ref: '#/components/requestBodies/ClipPatchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClipApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      description: Delete Clip from ElasticSearch index.
+      operationId: deleteClip
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Clips
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteSuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /field-weights:
+    get:
+      description: Get all Field Weights in Postgres dababase.
+      operationId: getAllFieldWeights
+      tags:
+        - FieldWeights
+      responses:
+        '200':
+          $ref: '#/components/responses/FieldWeightGetApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/field-weights/{id}':
+    patch:
+      description: Update Field Weight in Postgres dababase.
+      operationId: patchFieldWeight
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - FieldWeights
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      requestBody:
+        $ref: '#/components/requestBodies/FieldWeightPatchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/FieldWeightApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/field-weights/{id}/reset':
+    patch:
+      description: Reset Field Weight in Postgres dababase.
+      operationId: resetFieldWeight
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - FieldWeights
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      responses:
+        '200':
+          $ref: '#/components/responses/FieldWeightApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/pages/{id}':
+    post:
+      description: Insert new Page into ElasticSearch.
+      operationId: postPage
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Pages
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      requestBody:
+        $ref: '#/components/requestBodies/PagePostRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/PageApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      description: Update Page in ElasticSearch index.
+      operationId: patchPage
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Pages
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      requestBody:
+        $ref: '#/components/requestBodies/PagePatchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/PageApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      description: Delete Page from ElasticSearch index.
+      operationId: deletePage
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Pages
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteSuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/playlists/{id}':
+    post:
+      description: Insert new Playlist into ElasticSearch.
+      operationId: postPlaylist
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Playlists
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      requestBody:
+        $ref: '#/components/requestBodies/PlaylistPostRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/PlaylistApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      description: Update Playlist in ElasticSearch index.
+      operationId: patchPlaylist
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Playlists
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      requestBody:
+        $ref: '#/components/requestBodies/PlaylistPatchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/PlaylistApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      description: Delete Playlist from ElasticSearch index.
+      operationId: deletePlaylist
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Playlists
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteSuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/podcasts/{id}':
+    post:
+      description: Insert new Podcast into ElasticSearch.
+      operationId: postPodcast
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Podcasts
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      requestBody:
+        $ref: '#/components/requestBodies/PodcastPostRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/PodcastApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      description: Update Podcast in ElasticSearch index.
+      operationId: patchPodcast
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Podcasts
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      requestBody:
+        $ref: '#/components/requestBodies/PodcastPatchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/PodcastApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      description: Delete Podcast from ElasticSearch index.
+      operationId: deletePodcast
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Podcasts
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteSuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/shows/{id}':
+    post:
+      description: Insert new Show into ElasticSearch.
+      operationId: postShows
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Shows
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      requestBody:
+        $ref: '#/components/requestBodies/ShowPostRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ShowApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      description: Update Show in ElasticSearch index.
+      operationId: patchShows
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Shows
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      requestBody:
+        $ref: '#/components/requestBodies/ShowPatchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ShowApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      description: Delete Show from ElasticSearch index.
+      operationId: deleteShows
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Shows
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteSuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/stations/{id}':
+    post:
+      description: Insert new Station into ElasticSearch.
+      operationId: postStations
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Stations
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      requestBody:
+        $ref: '#/components/requestBodies/StationPostRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/StationApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      description: Update Station in ElasticSearch index.
+      operationId: patchStations
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Stations
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      requestBody:
+        $ref: '#/components/requestBodies/StationPatchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/StationApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      description: Delete Station from ElasticSearch index.
+      operationId: deleteStations
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Stations
+      parameters:
+        - $ref: '#/components/parameters/RadioApiId'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteSuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /autocomplete:
+    get:
+      description: Search as you type endpoint.
+      operationId: getAutocomplete
+      tags:
+        - Search
+      parameters:
+        - in: query
+          name: searchQuery
+          required: true
+          schema:
+            type: string
+          description: Query request.
+        - in: query
+          name: filter
+          schema:
+            type: string
+          description: >-
+            A comma separated list of indices to search. (stations, shows,
+            podcasts) Leave blank to search all indices.
+        - in: query
+          name: size
+          schema:
+            type: integer
+          description: Number of results to return.
+        - in: query
+          name: flatten
+          example: false
+          schema:
+            type: boolean
+          description: >-
+            Flattens first parent station into root level. Sets parents array to
+            empty.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SearchResponse'
+              examples:
+                ClipResponse:
+                  $ref: '#/components/examples/ClipResponse'
+                PageResponse:
+                  $ref: '#/components/examples/PageResponse'
+                PlaylistApiResponse:
+                  $ref: '#/components/examples/PlaylistResponse'
+                PodcastApiResponse:
+                  $ref: '#/components/examples/PodcastResponse'
+                ShowResponse:
+                  $ref: '#/components/examples/ShowResponse'
+                StationApiResponse:
+                  $ref: '#/components/examples/StationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                ValidationError:
+                  $ref: '#/components/examples/ValidationError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                InternalServerError:
+                  $ref: '#/components/examples/InternalServerError'
+  /x1:
+    get:
+      description: >-
+        Search as you type endpoint that only returns stations that have a
+        Triton Stream.
+      operationId: getX1
+      tags:
+        - Search
+      parameters:
+        - in: query
+          name: searchQuery
+          required: true
+          schema:
+            type: string
+          description: Query request.
+        - in: query
+          name: filter
+          schema:
+            type: string
+          description: >-
+            A comma seperated list of indices to search. (stations, shows,
+            pages, podcasts, clips) Leave blank to search all indices.
+        - in: query
+          name: size
+          schema:
+            type: integer
+          description: Number of results to return.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SearchResponse'
+              examples:
+                ClipResponse:
+                  $ref: '#/components/examples/ClipResponse'
+                PageResponse:
+                  $ref: '#/components/examples/PageResponse'
+                PlaylistApiResponse:
+                  $ref: '#/components/examples/PlaylistResponse'
+                PodcastApiResponse:
+                  $ref: '#/components/examples/PodcastResponse'
+                ShowResponse:
+                  $ref: '#/components/examples/ShowResponse'
+                StationApiResponse:
+                  $ref: '#/components/examples/StationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                ValidationError:
+                  $ref: '#/components/examples/ValidationError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                InternalServerError:
+                  $ref: '#/components/examples/InternalServerError'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+  examples:
+    UnauthorizedError:
+      summary: Example of a Unauthorized Error
+      value:
+        errors:
+          - id: b22b8648-5204-4fb7-9b10-cf901d122b7e
+            title: Unauthorized
+            detail: Authentication not valid or not provided
+            status: 401
+    BadRequestError:
+      summary: Example of a Bad Request Error
+      value:
+        errors:
+          - id: 9ce2faeb-7607-4432-af4c-525c10db7320
+            title: Bad Request
+            detail: You entered a bad request
+            status: 400
+    NotFoundError:
+      summary: Example of a Not Found Error
+      value:
+        errors:
+          - id: 948fb33c-c7bd-44ba-9e4c-be1f2b31729b
+            title: Not Found
+            detail: The resource you requested is not found
+            status: 404
+    InternalServerError:
+      summary: Example of a Internal Server Error
+      value:
+        errors:
+          - id: 8fcf55f9-854e-40fa-ae0e-6c2a06e3fec8
+            title: Internal server error
+            detail: Something went wrong
+            status: 500
+    ValidationError:
+      summary: Example of a Validation Error
+      value:
+        message: request.body.station_id should be integer
+        errors:
+          - path: .body.station_id
+            message: should be integer
+            errorCode: type.openapi.validation
+    ShowResponse:
+      summary: Show search response.
+      value:
+        - id: 14302
+          image: 'https://images.radio.com/shows/WFEZ_AC+Shaw_Weekends.jpg'
+          importance: 2
+          score: 2.32123
+          resource_type: show
+          name: Ac Shaw
+          parents:
+            - id: 857
+              image: 'https://images.radio.com/logos/WQAM-AM_1400x1400.png'
+              markets: 'Miami, FL'
+              importance: 5
+              genres: Sports
+              parents: []
+              resource_type: station
+              name: WQAMAM2
+              partner_name: Entercom
+              popularity: 4
+              uuid: station_857
+              triton_stream: true
+          uuid: show_14302
+    ClipResponse:
+      summary: Clip search response.
+      value:
+        - id: 117711
+          image: 'https://www.omnycontent.com/d/clips/image.jpg'
+          importance: 5
+          score: 2.32123
+          parents:
+            - category: Sports & Recreation
+              id: 29305
+              image: 'https://pbcdn1.podbean.com/imglogo/image-logo/3530161/Logo.png'
+              importance: 10
+              parents:
+                - station_417
+              resource_type: podcast
+              name: Finfans Podcast - Miami Dolphins
+              uuid: podcast_29305
+            - id: 101
+              image: >-
+                https://images.radio.com/playlist/69D2532784703FC24387BC08D58DA3AA.jpg
+              importance: 1
+              parents:
+                - station_417
+              resource_type: playlist
+              name: KLLCFM On-Demand Podcast
+              uuid: playlist_101
+          resource_type: clip
+          name: Automotive Insight - Sales Slide - Not As Bas As It Looks
+          uuid: clip_117711
+    StationResponse:
+      summary: Station search response.
+      value:
+        - id: 857
+          image: 'https://images.radio.com/logos/WQAM-AM_1400x1400.png'
+          markets: 'Miami, FL'
+          importance: 5
+          score: 2.32123
+          genres: Sports
+          parents: []
+          resource_type: station
+          name: WQAMAM2
+          partner_name: Entercom
+          popularity: 4
+          uuid: station_857
+          triton_stream: true
+    PodcastResponse:
+      summary: Podcast search response.
+      value:
+        - category: Sports & Recreation
+          id: 29305
+          image: 'https://pbcdn1.podbean.com/imglogo/image-logo/3530161/Logo.png'
+          importance: 10
+          score: 2.32123
+          parents:
+            - id: 857
+              image: 'https://images.radio.com/logos/WQAM-AM_1400x1400.png'
+              markets: 'Miami, FL'
+              importance: 5
+              genres: Sports
+              parents: []
+              resource_type: station
+              name: WQAMAM2
+              partner_name: Entercom
+              popularity: 4
+              uuid: station_857
+              triton_stream: true
+          resource_type: podcast
+          name: Finfans Podcast - Miami Dolphins
+          uuid: podcast_29305
+    PageResponse:
+      summary: Page search response.
+      value:
+        - id: 34
+          image: 'https://images.radio.com/page_module/ic_music.png'
+          importance: 5
+          score: 2.32123
+          parents: []
+          resource_type: page
+          page_name: Localytics Modules (March 21st Release)
+          page_module_name: Discover New Alt. Music Here
+          uuid: page_34
+    PlaylistResponse:
+      summary: Playlist search response.
+      value:
+        - id: 101
+          image: >-
+            https://images.radio.com/playlist/69D2532784703FC24387BC08D58DA3AA.jpg
+          importance: 1
+          score: 2.32123
+          parents:
+            - id: 857
+              image: 'https://images.radio.com/logos/WQAM-AM_1400x1400.png'
+              markets: 'Miami, FL'
+              importance: 5
+              genres: Sports
+              parents: []
+              resource_type: station
+              name: WQAMAM2
+              partner_name: Entercom
+              popularity: 4
+              uuid: station_857
+              triton_stream: true
+          resource_type: playlist
+          name: KLLCFM On-Demand Podcast
+          uuid: playlist_101
+  parameters:
+    RadioApiId:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+      description: Radio API resource id.
+  schemas:
+    DeleteSuccessResponse:
+      type: object
+      description: Successful deletion of resource.
+      properties:
+        message:
+          type: string
+          example: Successfully deleted the resource you requested.
+    SearchResponse:
+      type: object
+      description: >-
+        Note: This response object is incorrect. Please see the examples in the
+        dropdown of autocomplete/search API.
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: id of the resource in radio.com.
+          example: 1234
+        resource_type:
+          type: string
+          description: type of the resource.
+          example: podcast
+        importance:
+          type: integer
+          format: int32
+          description: importance of the resource.
+          example: 15
+        image:
+          type: string
+          description: url of the resource image.
+          example: 'https://images.radio.com/podcasts/images/podcast.jpg'
+        uuid:
+          type: string
+          example: station_417
+          description: unique identifier for the resource.
+        parents:
+          description: >-
+            Array of parent objects. If there are no associated parents, an
+            empty parents array will be returned.
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int32
+                description: id of the resource in radio.com.
+                example: 1234
+              resource_type:
+                type: string
+                description: type of the resource.
+                example: podcast
+              importance:
+                type: integer
+                format: int32
+                description: importance of the resource.
+                example: 15
+              image:
+                type: string
+                description: url of the resource image.
+                example: 'https://images.radio.com/podcasts/images/podcast.jpg'
+              uuid:
+                type: string
+                example: station_417
+                description: unique identifier for the resource.
+              parents:
+                description: >-
+                  Array of parent objects. If there are no associated parents,
+                  an empty parents array will be returned.
+                type: array
+                items:
+                  type: string
+              name:
+                type: string
+                description: name of the resource.
+                example: Bobby Portis Developing A Bad Rep?
+              station_name:
+                type: string
+                description: name of the station.
+                example: FM 100
+              station_city:
+                type: string
+                description: city of where station resides.
+                example: Denver
+              station_callsign:
+                type: string
+                description: callsign of the station.
+                example: WMCFM
+              page_name:
+                type: string
+                description: name of the page.
+                example: New York Giants
+              category:
+                type: string
+                description: category of the resource.
+                example: Sports & Recreation
+              partner_name:
+                type: string
+                description: partner name of the resource.
+                example: Audioboom
+              parent_callsigns:
+                type: string
+                description: callsigns of parents (i.e. stations) of a (show) resource.
+                example: 'MIKESON, WFANAM'
+              genres:
+                type: string
+                description: genres of a (station) resource.
+                example: 'Adult Rock, Classic Rock'
+              markets:
+                type: string
+                description: market of a (station) resource.
+                example: 'Minneapolis, MN'
+              triton_stream:
+                type: string
+                description: Streamable by X1.
+                example: 'true'
+        name:
+          type: string
+          description: name of the resource.
+          example: Bobby Portis Developing A Bad Rep?
+        station_name:
+          type: string
+          description: name of the station.
+          example: FM 100
+        station_city:
+          type: string
+          description: city of where station resides.
+          example: Denver
+        station_callsign:
+          type: string
+          description: callsign of the station.
+          example: WMCFM
+        page_name:
+          type: string
+          description: name of the page.
+          example: New York Giants
+        category:
+          type: string
+          description: category of the resource.
+          example: Sports & Recreation
+        partner_name:
+          type: string
+          description: partner name of the resource.
+          example: Audioboom
+        parent_callsigns:
+          type: string
+          description: callsigns of parents (i.e. stations) of a (show) resource.
+          example: 'MIKESON, WFANAM'
+        genres:
+          type: string
+          description: genres of a (station) resource.
+          example: 'Adult Rock, Classic Rock'
+        score:
+          type: number
+          format: float
+          description: Elasticsearch score.
+          example: 2.13467
+        markets:
+          type: string
+          description: market of a (station) resource.
+          example: 'Minneapolis, MN'
+        triton_stream:
+          type: string
+          description: Streamable by X1.
+          example: 'true'
+    ClipApiResponse:
+      type: object
+      description: API response from Clips POST and PATCH.
+      properties:
+        importance:
+          type: integer
+          format: int32
+          example: 10
+          description: Used for weighting a resource.
+        name:
+          type: string
+          example: clip name
+          description: Name of the resource.
+        description:
+          type: string
+          example: brief description of podcast.
+          description: Description of the resource.
+        image:
+          type: string
+          example: 'http://radio.com/podcast_image.png'
+          description: Image for the resource.
+        uuid:
+          type: string
+          example: station_417
+          description: unique identifier for the resource.
+        parents:
+          type: array
+          items:
+            type: string
+            example: station_417
+            description: array of parent(s) uuids.
+    ClipPatchRequest:
+      type: object
+      description: Request body for PATCH of Clips.
+      minProperties: 1
+      properties:
+        importance:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 1000
+          example: 5
+          description: Used for weighting a resource.
+        title:
+          type: string
+          maxLength: 256
+          description: Title of the resource.
+          example: resource name
+        description:
+          type: string
+          maxLength: 2048
+          example: brief description of the resource
+          description: Description of the resource.
+        image:
+          type: string
+          maxLength: 256
+          example: 'http://radio.com/clip_image.png'
+          description: Image for the resource.
+    ClipPostRequest:
+      type: object
+      description: Request body for POST of Clips.
+      required:
+        - title
+        - description
+        - image
+      properties:
+        importance:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 1000
+          example: 5
+          description: Used for weighting a resource.
+        title:
+          type: string
+          maxLength: 256
+          description: Title of the resource.
+          example: resource name
+        description:
+          type: string
+          maxLength: 2048
+          example: brief description of the resource
+          description: Description of the resource.
+        image:
+          type: string
+          maxLength: 256
+          example: 'http://radio.com/clip_image.png'
+          description: Image for the resource.
+    PodcastApiResponse:
+      type: object
+      description: API response from Podcasts POST and PATCH.
+      properties:
+        importance:
+          type: integer
+          format: int32
+          example: 10
+          description: Used for weighting a resource.
+        name:
+          type: string
+          example: podcast name
+          description: Name of the resource.
+        description:
+          type: string
+          example: brief description of podcast.
+          description: Description of the resource.
+        category:
+          type: string
+          example: comma separated categories.
+          description: Category of the resource.
+        keywords:
+          type: array
+          items:
+            type: string
+            example: array of keywords.
+            description: Searchable keywords for the resource.
+        image:
+          type: string
+          example: 'http://radio.com/podcast_image.png'
+          description: Image for the resource.
+        partner_name:
+          type: string
+          example: Entercom
+          description: Partner name.
+        uuid:
+          type: string
+          example: station_417
+          description: unique identifier for the resource.
+        parents:
+          type: array
+          items:
+            type: string
+            example: station_417
+            description: array of parent(s) uuids.
+    PodcastPostRequest:
+      type: object
+      description: Request body for POST of Podcasts.
+      required:
+        - title
+        - description
+        - category
+        - keywords
+        - image
+        - partner_id
+      properties:
+        importance:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 1000
+          example: 5
+          description: Used for weighting a resource.
+        title:
+          type: string
+          maxLength: 256
+          example: podcast name
+          description: Title of the resource.
+        description:
+          type: string
+          maxLength: 2048
+          example: brief description of podcast.
+          description: Description of the resource.
+        category:
+          type: string
+          maxLength: 256
+          example: comma separated categories.
+          description: Category of the resource.
+        keywords:
+          type: string
+          maxLength: 256
+          example: comma separated keywords.
+          description: Searchable keywords for the resource.
+        image:
+          type: string
+          maxLength: 256
+          example: 'http://radio.com/podcast_image.png'
+          description: Image for the resource.
+        partner_id:
+          type: integer
+          format: int32
+          example: 10
+          description: Radio.com partner.id.
+          maximum: 2147483647
+    PodcastPatchRequest:
+      type: object
+      description: Request body for PATCH of Podcasts.
+      minProperties: 1
+      properties:
+        importance:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 1000
+          example: 5
+          description: Used for weighting a resource.
+        title:
+          type: string
+          maxLength: 256
+          example: podcast name
+          description: Title of the resource.
+        description:
+          type: string
+          maxLength: 2048
+          example: brief description of podcast.
+          description: Description of the resource.
+        category:
+          type: string
+          maxLength: 256
+          example: comma separated categories.
+          description: Category of the resource.
+        keywords:
+          type: string
+          maxLength: 256
+          example: comma separated keywords.
+          description: Searchable keywords for the resource.
+        image:
+          type: string
+          maxLength: 256
+          example: 'http://radio.com/podcast_image.png'
+          description: Image for the resource.
+        partner_id:
+          type: integer
+          format: int32
+          example: 10
+          description: Radio.com partner.id.
+          maximum: 2147483647
+    ShowPostRequest:
+      type: object
+      description: Request body for POST of Shows.
+      required:
+        - name
+        - image
+      properties:
+        importance:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 1000
+          example: 5
+          description: Used for weighting a resource.
+        name:
+          type: string
+          maxLength: 256
+          example: show name
+          description: Name of the resource.
+        image:
+          type: string
+          maxLength: 256
+          example: 'http://radio.com/show_image.png'
+          description: Image for the resource.
+        description:
+          type: string
+          maxLength: 2048
+          example: brief description of podcast.
+          description: Description of the resource.
+        keywords:
+          type: string
+          maxLength: 256
+          example: comma separated keywords.
+          description: Searchable keywords for the resource.
+    ShowPatchRequest:
+      type: object
+      description: Request body for PATCH of Shows.
+      minProperties: 1
+      properties:
+        importance:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 1000
+          example: 5
+          description: Used for weighting a resource.
+        name:
+          type: string
+          maxLength: 256
+          example: show name
+          description: Name of the resource.
+        image:
+          type: string
+          maxLength: 256
+          example: 'http://radio.com/show_image.png'
+          description: Image for the resource.
+        description:
+          type: string
+          maxLength: 2048
+          example: brief description of podcast.
+          description: Description of the resource.
+        keywords:
+          type: string
+          maxLength: 256
+          example: comma separated keywords.
+          description: Searchable keywords for the resource.
+    ShowApiResponse:
+      type: object
+      description: API response from Shows POST and PATCH.
+      properties:
+        importance:
+          type: integer
+          format: int32
+          example: 2
+          description: Used for weighting a resource.
+        name:
+          type: string
+          example: show name
+          description: Name of the resource.
+        image:
+          type: string
+          example: 'http://radio.com/show_image.png'
+          description: Image for the resource.
+        description:
+          type: string
+          example: brief description of podcast.
+          description: Description of the resource.
+        keywords:
+          type: string
+          example: comma separated keywords.
+          description: Searchable keywords for the resource.
+        uuid:
+          type: string
+          example: station_417
+          description: unique identifier for the resource.
+        parents:
+          type: array
+          items:
+            type: string
+            example: station_417
+            description: array of parent(s) uuids.
+    StationApiResponse:
+      type: object
+      description: API response from Stations POST and PATCH.
+      properties:
+        importance:
+          type: integer
+          format: int32
+          example: 5
+          description: Used for weighting a resource.
+        name:
+          type: string
+          example: station name
+          description: Name of the resource.
+        slogan:
+          type: string
+          example: station slogan
+          description: Slogan of the station resource.
+        description:
+          type: string
+          example: brief description of station
+          description: Description of the resource.
+        format:
+          type: string
+          example: format
+          description: Format of the content of the resource.
+        callsign:
+          type: string
+          example: callsign
+          description: Station callsign of the resource.
+        category:
+          type: string
+          example: category
+          description: Category of the resource.
+        image:
+          type: string
+          example: 'https://images.radio.com/logos/WXYZ-FM_1400x1400.png'
+          description: Image for the resource.
+        markets:
+          type: string
+          example: 'Miami FL, Denver, CO'
+          description: Markets of the resource.
+        genres:
+          type: string
+          example: 'Rock,Metal'
+          description: Genres of the resource.
+        partner_name:
+          type: string
+          example: Entercom
+          description: Partner name.
+        popularity:
+          type: integer
+          example: 4
+          description: Popularity of the resource.
+        uuid:
+          type: string
+          example: station_417
+          description: unique identifier for the resource.
+        triton_stream:
+          type: boolean
+          example: true
+          description: whether or not the resource is a triton stream.
+        parents:
+          type: array
+          items:
+            type: string
+            example: station_417
+            description: array of parent(s) uuids.
+        keywords:
+          type: array
+          items:
+            type: string
+            example: WFAN
+            description: array of resource keywords.
+    StationPostRequest:
+      type: object
+      description: Request body for POST of Stations.
+      required:
+        - name
+        - category
+        - partner_id
+        - popularity
+        - image
+        - markets
+        - genres
+      properties:
+        importance:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 1000
+          example: 5
+          description: Used for weighting a resource.
+        name:
+          type: string
+          minLength: 1
+          maxLength: 256
+          example: station name
+          description: Name of the resource.
+        slogan:
+          type: string
+          minLength: 1
+          maxLength: 256
+          example: station slogan
+          description: Slogan of the station resource.
+        description:
+          type: string
+          minLength: 1
+          maxLength: 2048
+          example: brief description of station
+          description: Description of the resource.
+        format:
+          type: string
+          minLength: 1
+          maxLength: 256
+          example: format
+          description: Format of the content of the resource.
+        callsign:
+          type: string
+          minLength: 1
+          maxLength: 256
+          example: callsign
+          description: Station callsign of the resource.
+        category:
+          type: string
+          minLength: 1
+          maxLength: 256
+          example: category
+          description: Category of the resource.
+        image:
+          type: string
+          format: uri
+          pattern: '^https:\/\/images.radio.com.*$'
+          minLength: 1
+          maxLength: 256
+          example: 'https://images.radio.com/logos/WXYZ-FM_1400x1400.png'
+          description: Image for the resource.
+        markets:
+          type: array
+          items:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 2147483647
+          example:
+            - 18
+            - 4
+          description: Markets of the resource.
+        genres:
+          type: array
+          items:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 2147483647
+          example:
+            - 15
+            - 44
+          description: Genres of the resource.
+        partner_id:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+          example: 10
+          description: Radio.com partner.id.
+        popularity:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 2147483647
+          example: 4
+          description: Popularity of the resource.
+        keywords:
+          type: string
+          minLength: 1
+          maxLength: 256
+          example: comma separated keywords.
+          description: Searchable keywords for the resource.
+    StationPatchRequest:
+      type: object
+      description: Request body for PATCH of Stations.
+      minProperties: 1
+      properties:
+        importance:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 1000
+          example: 5
+          description: Used for weighting a resource.
+        name:
+          type: string
+          minLength: 1
+          maxLength: 256
+          example: station name
+          description: Name of the resource.
+        slogan:
+          type: string
+          minLength: 1
+          maxLength: 256
+          example: station slogan
+          description: Slogan of the station resource.
+        description:
+          type: string
+          minLength: 1
+          maxLength: 2048
+          example: brief description of station
+          description: Description of the resource.
+        format:
+          type: string
+          minLength: 1
+          maxLength: 256
+          example: format
+          description: Format of the content of the resource.
+        callsign:
+          type: string
+          minLength: 1
+          maxLength: 256
+          example: callsign
+          description: Station callsign of the resource.
+        category:
+          type: string
+          minLength: 1
+          maxLength: 256
+          example: category
+          description: Category of the resource.
+        image:
+          type: string
+          minLength: 1
+          maxLength: 256
+          example: 'https://images.radio.com/logos/WXYZ-FM_1400x1400.png'
+          description: Image for the resource.
+        markets:
+          type: array
+          items:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 2147483647
+          example:
+            - 18
+            - 4
+          description: Markets of the resource.
+        genres:
+          type: array
+          items:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 2147483647
+          example:
+            - 15
+            - 44
+          description: Genres of the resource.
+        partner_id:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+          example: 10
+          description: Radio.com partner.id.
+        popularity:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+          example: 10
+          description: Popularity of the resource.
+        keywords:
+          type: string
+          minLength: 1
+          maxLength: 256
+          example: comma separated keywords.
+          description: Searchable keywords for the resource.
+    PageApiResponse:
+      type: object
+      description: API response from Pages POST and PATCH.
+      properties:
+        importance:
+          type: integer
+          format: int32
+          example: 5
+          description: Used for weighting a resource.
+        page_name:
+          type: string
+          example: name of page resource
+          description: Name of the resource.
+        image:
+          type: string
+          example: 'http://radio.com/page_module_image.png'
+          description: Image for the resource.
+        uuid:
+          type: string
+          example: station_417
+          description: unique identifier for the resource.
+        parents:
+          type: array
+          items:
+            type: string
+            example: station_417
+            description: array of parent(s) uuids.
+    PagePatchRequest:
+      type: object
+      description: Request body for PATCH of Pages.
+      minProperties: 1
+      properties:
+        importance:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 1000
+          example: 5
+          description: Used for weighting a resource.
+        page_name:
+          type: string
+          maxLength: 256
+          example: name of page resource
+          description: Name of the resource.
+        image:
+          type: string
+          maxLength: 256
+          example: 'http://radio.com/page_module_image.png'
+          description: Image for the resource.
+    PagePostRequest:
+      type: object
+      description: Request body for POST of Pages.
+      required:
+        - page_name
+      properties:
+        importance:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 1000
+          example: 5
+          description: Used for weighting a resource.
+        page_name:
+          type: string
+          maxLength: 256
+          example: name of page resource
+          description: Name of the resource.
+        image:
+          type: string
+          maxLength: 256
+          example: 'http://radio.com/page_module_image.png'
+          description: Image for the resource.
+    PlaylistApiResponse:
+      type: object
+      description: API response from Playlists POST and PATCH.
+      properties:
+        importance:
+          type: integer
+          format: int32
+          example: 1
+          description: Used for weighting a resource.
+        image:
+          type: string
+          example: 'http://radio.com/playlist_image.png'
+          description: Image for the resource.
+        name:
+          type: string
+          example: name of the resource
+          description: Name of the resource.
+        description:
+          type: string
+          example: brief description of the resource
+          description: Description of the resource.
+        uuid:
+          type: string
+          example: station_417
+          description: unique identifier for the resource.
+        parents:
+          type: array
+          items:
+            type: string
+            example: station_417
+          description: array of parent(s) uuids.
+    PlaylistPostRequest:
+      type: object
+      description: Request body for POST of Playlists.
+      required:
+        - title
+      properties:
+        importance:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 1000
+          example: 5
+          description: Used for weighting a resource.
+        image:
+          type: string
+          maxLength: 256
+          example: 'http://radio.com/playlist_image.png'
+          description: Image for the resource.
+        title:
+          type: string
+          maxLength: 256
+          example: name of the resource
+          description: Title of the resource.
+        description:
+          type: string
+          minLength: 1
+          maxLength: 2048
+          example: brief description of the resource
+          description: Description of the resource.
+    PlaylistPatchRequest:
+      type: object
+      description: Request body for PATCH of Playlists.
+      minProperties: 1
+      properties:
+        importance:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 1000
+          example: 5
+          description: Used for weighting a resource.
+        image:
+          type: string
+          maxLength: 256
+          example: 'http://radio.com/playlist_image.png'
+          description: Image for the resource.
+        title:
+          type: string
+          maxLength: 256
+          example: name of the resource
+          description: Title of the resource.
+        description:
+          type: string
+          minLength: 1
+          maxLength: 2048
+          example: brief description of the resource
+          description: Description of the resource.
+    FieldWeightPatchRequest:
+      type: object
+      description: Request body for PATCH of FieldWeights.
+      required:
+        - weight
+      properties:
+        weight:
+          type: number
+          minimum: 0
+          maximum: 99.99
+          example: 1.23
+          nullable: true
+          description: 'Weight of the field, format numeric (4, 2).'
+    FieldWeightApiResponse:
+      description: API response from PATCH FieldWeights.
+      type: object
+      properties:
+        status:
+          description: Http status code
+          type: integer
+          format: int32
+          example: 200
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int32
+                description: Id of the weight.
+                example: 12
+              name:
+                type: string
+                example: station_name
+                description: Friendly name of the weight.
+              weight:
+                type: number
+                example: 1.23
+                description: 'Weight of the field, format numeric (4, 2).'
+    FieldWeightGetApiResponse:
+      description: API response from PATCH FieldWeights.
+      type: object
+      properties:
+        field_weights:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int32
+                description: Id of the weight.
+                example: 12
+              name:
+                type: string
+                example: station_name
+                description: Friendly name of the weight.
+              weight:
+                type: number
+                example: 1.23
+                description: 'Weight of the field, format numeric (4, 2).'
+              created_date:
+                type: string
+                example: '2020-06-11T02:23:06.101Z'
+                description: Date the weight was introduced.
+              modified_date:
+                type: string
+                example: '2020-06-11T02:23:06.101Z'
+                description: Date the weight was last modified.
+  requestBodies:
+    PlaylistPostRequest:
+      required: true
+      description: Playlist POST data body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PlaylistPostRequest'
+    PlaylistPatchRequest:
+      required: true
+      description: Playlist PATCH data body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PlaylistPatchRequest'
+    ClipPostRequest:
+      required: true
+      description: Clip POST data body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClipPostRequest'
+    ClipPatchRequest:
+      required: true
+      description: Clip PATCH data body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClipPatchRequest'
+    PodcastPostRequest:
+      required: true
+      description: Podcast POST data body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PodcastPostRequest'
+    PodcastPatchRequest:
+      required: true
+      description: Podcast PATCH data body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PodcastPatchRequest'
+    ShowPostRequest:
+      required: true
+      description: Show POST data body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ShowPostRequest'
+    ShowPatchRequest:
+      required: true
+      description: Show PATCH data body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ShowPatchRequest'
+    StationPostRequest:
+      required: true
+      description: Station POST data body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StationPostRequest'
+    StationPatchRequest:
+      required: true
+      description: Station PATCH data body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StationPatchRequest'
+    PagePostRequest:
+      required: true
+      description: Page POST data body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PagePostRequest'
+    PagePatchRequest:
+      required: true
+      description: Page PATCH data body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PagePatchRequest'
+    FieldWeightPatchRequest:
+      required: true
+      description: FieldWeight PATCH data body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FieldWeightPatchRequest'
+  responses:
+    DeleteSuccessResponse:
+      description: Resource successfully deleted.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeleteSuccessResponse'
+    ClipApiResponse:
+      description: Clip resource successfully patched or posted.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClipApiResponse'
+    FieldWeightGetApiResponse:
+      description: Field weights
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FieldWeightGetApiResponse'
+    FieldWeightApiResponse:
+      description: Field weights
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/FieldWeightApiResponse'
+    PageApiResponse:
+      description: Page resource was successfully posted or patched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PageApiResponse'
+    PlaylistApiResponse:
+      description: Playlist resource was successfully patched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PlaylistApiResponse'
+    PodcastApiResponse:
+      description: Podcast resource was successfully patched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PodcastApiResponse'
+    ShowApiResponse:
+      description: Show resource was successfully patched or posted.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ShowApiResponse'
+    StationApiResponse:
+      description: Station resource was successfully patched or posted.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StationApiResponse'
+    BadRequestError:
+      description: Bad Request
+      content:
+        application/json:
+          examples:
+            BadRequestError:
+              $ref: '#/components/examples/BadRequestError'
+            ValidationError:
+              $ref: '#/components/examples/ValidationError'
+    UnauthorizedError:
+      description: Unauthorized
+      content:
+        application/json:
+          examples:
+            UnauthorizedError:
+              $ref: '#/components/examples/UnauthorizedError'
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          examples:
+            NotFoundError:
+              $ref: '#/components/examples/NotFoundError'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          examples:
+            InternalServerError:
+              $ref: '#/components/examples/InternalServerError'

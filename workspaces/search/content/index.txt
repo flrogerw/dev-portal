@@ -1,0 +1,8 @@
+---
+layout: homepage.html
+title: Home
+
+hero:
+  title: Welcome to Audacy Developer Portal
+  tagline: Community. Curiosity. Creativity. Courage.
+---

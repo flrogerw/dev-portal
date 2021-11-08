@@ -1,0 +1,66 @@
+name: Kong
+fonts:
+  base: Roboto
+  code: Roboto Mono
+  headings: Lato
+colors:
+  header:
+    value: '#FFFFFF'
+    description: 'Background for header'
+  page:
+    value: '#FFFFFF'
+    description: 'Background on pages'
+  hero:
+    value: '#FE5000'
+    description: 'Background for hero text on hompage, about, login, contact us...'
+  text_hero:
+    value: '#FFFFFF'
+    description: Text on top of hero, used on homepage, about, login, contact us...
+  footer:
+    value: '#F7F9FA'
+    description: 'Background on footer'
+  accent:
+    # blue-500
+    value: '#1456CB'
+    description: 'Borders and catalog preview icons'
+  text_primary:
+    value: '#404040'
+    description: 'Main text'
+  text_secondary:
+    # steel-600
+    value: '#395380'
+    description: 'Supporting text, hints, etc.'
+  text_headings:
+    value: '#005999'
+    description: 'Headings'
+  text_links:
+    # blue-600
+    value: '#083C99'
+    descrption: 'Link color'
+  button_primary_fill:
+    # green-400
+    value: '#008036'
+    description: 'Background for Primary Button'
+  button_primary_fill_hover:
+    value: '#3DCC91'
+    description: 'Hover background for Primary Button'
+  button_primary_text:
+    value: '#FFFFFF'
+    description: 'Text for Primary Button'
+  button_secondary_fill:
+    description: 'Background for Secondary Button'
+    value: '#FFFFFF'
+  button_secondary_fill_hover:
+    description: 'Hover background for Secondary Button'
+    value: '#F0F9FF'
+  button_secondary_border:
+    description: 'Border Secondary Button'
+    value: '#A3D9FF'
+  button_secondary_text:
+    description: Text for Secondary Button
+    value: '#21A66F'
+images:
+  logo: assets/images/audacy.png
+  favicon: assets/images/favicon.png
+  twitter: assets/images/twitter.png
+  linkedin: assets/images/linkedin.png
