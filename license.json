@@ -1,7 +1,7 @@
 {
   "license": {
     "version": 1,
-    "signature": "4daf80e6c44a3b4803cfa590b4ac7ce60dc7e7dccf37e0818581a0cd69f159f96412a70eca5cb2e1fadd321d03ac5e91fa723e7340d28c5046aaef6e1432db76",
+    "signature": "XXXXXXXXXXXXXXXXXXXXX",
     "payload": {
       "customer": "Audacy, Inc.",
       "license_creation_date": "2021-07-30",
@@ -10,7 +10,7 @@
       "admin_seats": "Unlimited",
       "dataplanes": "1000",
       "license_expiration_date": "2022-07-29",
-      "license_key": "0011K00002HhKX5QAN_a1V1K0000084cLiUAI"
+      "license_key": "XXXXXXXXXXXXXXXXX"
     }
   }
 }
